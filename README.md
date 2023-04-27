@@ -67,3 +67,28 @@ apt remove openssh-server -y
 apt pruge openssh-server    > Remove all the configuration files
 dnf remove cockpit -y
 ```
+
+## CHECK THE SYSTEM DEGRADED OR NOT
+```
+systemctl status                  > **running is show everything is fine it is not degraded if it is red it is degraded**
+systemctl --failed                > **TO KNOW WHAT SERVICE IS FAILED**
+```
+## LETS DEGRADED THE SYSTEM
+```
+sudo echo "Port 22@AFHAKHA" >> /etc/ssh/sshd_config
+sudo systemctl restart ssh
+**THIS WILL DEGRADE THE SYSTEM IN THE NEXT STEP WE WILL TROUBLESHOOT THE ISSUE**
+```
+## DEBUGGING THE FAILED SERVICE WHICH DEGRADED THE LINUX SYSTEM
+```
+systemctl status
+systemctl --failed
+systemctl status <failed-service>                  > This Only gives last 5 logs 
+journalctl -u <failed-service> | tail -10 | less   > This gives last 10 logs
+jourcalctl -u <failed-service>  
+
+**CHECK THE LOGS WHICH IT POINTING OUT FILE PATH AND ERROR BASED ON THAT GO AND DEBUG THE ISSUE GOING TO THAT FILE**
+
+systemctl restart <failed-service>
+systemctl status                                   > **CHECK THE STATUS IS GREEN AND RUNNING**
+```
