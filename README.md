@@ -114,7 +114,7 @@ dnf install <package-name>
 ## UFW
 ```
 Command                                 Description
---------------------------------------------------------
+-----------------------------------------------------------------------------------------------
 ufw status shows                        whether UFW is active or inactive
 ufw enable                              starts and enables the firewall
 ufw show added                          lists ufw rules
@@ -130,9 +130,10 @@ ufw default allow outgoing
 ufw allow 22/tcp
 ```
 
-## FIREWALLD
+## FIREWALLD:
 ```
 Command                                                 Description
+--------------------------------------------------------------------------------------------------
 systemctl status firewalld                              Checks the status of the service
 firewall-cmd --list-ports                               Displays open networking ports (if any)
 firewall-cmd --add-port=80/tcp                          Opens port 80 on the system and makes it persistent across reboots
