@@ -92,3 +92,40 @@ jourcalctl -u <failed-service>
 systemctl restart <failed-service>
 systemctl status                                   > **CHECK THE STATUS IS GREEN AND RUNNING**
 ```
+
+## SYSTEMCTL COMMAND RUNNING ON THE OTHER SYSTEM
+```
+systemctl -H user@10.0.2.15 status networking
+```
+
+## KEEP THE SYSTEM UPDATE AND UPGRADED
+```
+sudo apt update && upgrade -y
+sudo apt --list upgradeable
+sudo apt install <package-name>
+dnf update -y
+dnf update --downloadonly
+dnf check-update
+dnf install <package-name>
+```
+
+## FIREWALLS IN LINUX
+
+## UFW
+```
+Command                                 Description
+--------------------------------------------------------
+ufw status shows                        whether UFW is active or inactive
+ufw enable                              starts and enables the firewall
+ufw show added                          lists ufw rules
+ufw reset                               disables ufw and deletes rules
+```
+```
+**Default global rules:**
+ufw default deny incoming
+ufw default allow outgoing
+```
+```
+**Example rule:**
+ufw allow 22/tcp
+```
