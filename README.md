@@ -55,3 +55,15 @@ nmap 10.0.0.45 -P
 ```
 ss -tulnw
 ```
+
+## CHECK THE PORTS WHICH ARE LISTINING ON & PROCESS ID AND USER WHO IS WORKING ON THAT
+```
+ss -plunt
+```
+
+## DISABLE THE SERVICE AND ALL CONFIGURATION
+```
+apt remove openssh-server -y
+apt pruge openssh-server    > Remove all the configuration files
+dnf remove cockpit -y
+```
