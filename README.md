@@ -120,12 +120,22 @@ ufw enable                              starts and enables the firewall
 ufw show added                          lists ufw rules
 ufw reset                               disables ufw and deletes rules
 ```
-```
 **Default global rules:**
+```
 ufw default deny incoming
 ufw default allow outgoing
 ```
-```
 **Example rule:**
+```
 ufw allow 22/tcp
+```
+
+## FIREWALLD
+```
+Command                                                 Description
+systemctl status firewalld                              Checks the status of the service
+firewall-cmd --list-ports                               Displays open networking ports (if any)
+firewall-cmd --add-port=80/tcp                          Opens port 80 on the system and makes it persistent across reboots
+firewall-cmd --get-active-zones                         Shows the type of zone in use by each network interface
+firewall-cmd --zone=block --change-interface=ens3       Changes the default zone of the ens3 network interface from public to block
 ```
