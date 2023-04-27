@@ -111,7 +111,7 @@ dnf install <package-name>
 
 ## FIREWALLS IN LINUX
 
-## UFW
+## 1. UFW: USED IN UBUNTU LESS SECURE
 ```
 Command                                 Description
 -----------------------------------------------------------------------------------------------
@@ -130,7 +130,7 @@ ufw default allow outgoing
 ufw allow 22/tcp
 ```
 
-## FIREWALLD:
+## 2. FIREWALLD: CAN BE INSTALLED AND USED MORE SECURE THAN UFW
 ```
 Command                                                 Description
 --------------------------------------------------------------------------------------------------
@@ -139,4 +139,39 @@ firewall-cmd --list-ports                               Displays open networking
 firewall-cmd --add-port=80/tcp                          Opens port 80 on the system and makes it persistent across reboots
 firewall-cmd --get-active-zones                         Shows the type of zone in use by each network interface
 firewall-cmd --zone=block --change-interface=ens3       Changes the default zone of the ens3 network interface from public to block
+```
+
+**SENARIO**
+```
+If you identify a threat in linux machine and being hacked
+```
+**PUT CONTINOUS PING TO THE SERVER WHICH YOU FEEL LIKE ATTACKED**
+```
+ping 10.0.0.10
+```
+**SOLUTION: CLOSED ALL CURRENT CONNECTIONS & PING STOPS**
+```
+sudo firewall-cmd --panic-on
+sudo firewall-cmd --panic-off
+```
+
+## 3. IPTABLES & NFTABLES
+```
+**Linux Kernel**   
+ ** Netfilter**
+ 
+- ip_tables
+- ip6_tables
+- arp_tables
+- ebtables
+- nftables
+```
+```
+**User-space tools**
+
+iptables
+ip6tables
+arptables
+ebtables
+nft
 ```
