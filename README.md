@@ -175,3 +175,38 @@ arptables
 ebtables
 nft
 ```
+
+## USER SECURITY
+```
+PASSWORD CHARACTERISTICS
+-------------------------------------------------------------------------------------------------------------------
+1. 8-10 Characters or more (Recommended to 16 character)
+2. Uppercase letters
+3. Lowercase letters
+4. Numbers 
+5. Special characters
+
+**PASSWORRD VAULT: KEYPASS**
+```
+**RANDOM PASSWORD GENERATOR**
+```
+openssl rand -base64 24
+```
+**Diff between Normal user and Sudo User**
+```
+id user
+output: uid=1000(user) gid=1003(dave) groups=10003(dave), 27(sudo)
+
+**IMP:**
+Ubuntu= sudo
+Debian= sudo
+Centos= wheel
+Redhat= wheel
+fedora= wheel
+
+**PROMT**
+USER = $
+ROOT = #
+```
+
+
