@@ -208,5 +208,141 @@ fedora= wheel
 USER = $
 ROOT = #
 ```
+**SUDO COMMANDS**
+```
+sudo su
+su - user         > With dir for that user
+su -              > without dir for that user
+id user
+id
+sudo -i           > Gives root privileges
+```
+# Always don't use Root account use case "Use Admin Account to do all the tasks"
+# Least Privilege for the user to above security issue.
+**USER CREATION COMMANDS**
+```
+adduser sysadmin
+useradd sysadmin
+passwod sysadmin
+usermod -aG sudo sysadmin                    > Assigning sudo previlage to user
+cat /etc/passwd
+cat /etc/group
+visudo
+nano /etc/sudoers
 
+```
 
+## USE MULTIFACTOR AUTHENTICATION (MFA)
+```
+1. SOMETHING THE USER KNOWS
+2. SOMETHING THE USER HAS
+3. SOMETHING THE USER IS
+```
+**CHANGE THE BASH SHEEL FOR THE USER**
+```
+usermod -s /bin/bash sysadmin             > It avoid $ promt when using /bin/sh
+```
+**EDITING SUDOERS FILE**
+```
+visudo   OR  nano /etc/sudoers
+root ALL=(ALL:ALL) ALL
+user ALL=/etc/passwd
+
+%sysadmin localhost=/sbin/reboot
+defaults:sysadmin timestamp_timeout=2400
+```
+```
+USERLIST        = /etc/passwd
+PASSWORD LIST   = /etc/shadow
+**PASSWORD IS CRYPTO GRAPHIC HASHed WILL BE DISPLAYED IN THE SHADOW FILE**
+```
+**PAM = Pluggable Authentication Modules**
+```
+1. Manages Password Rules 
+2. Manages Password Authentication methods
+3. Method should be used for Hashing methods
+**Check Which Hashing Methods is Used "Recommended is MD5"** 
+nano /etc/pam
+```
+
+## STRENGTHING USER PASSWORD
+## Requirement : 
+1. Min= 12 Characters
+2. Min_Upper_letter= 1
+3. Min_Special_char= 1 
+4. Only allows 3 times to Enter Password
+```
+nano /etc/pam
+
+password  [success=1 default=ingnore]    pam_unix.so  obscure use_authtok try_first_pass md5 minlen=12
+
+sudo apt install libpam-pwquality -y
+
+nano /etc/pam  
+
+password  requisite                      pam_pwquailty.so retry=3 ucredit=1 ocredit=1 minclass=2
+```
+
+## SSH
+
+![image](https://user-images.githubusercontent.com/107435692/235048028-efc7d7b8-49b7-41a3-b850-01572458391e.png)
+
+```
+ssh -V
+systemctl status ssh
+journalctl -u ssh                > To check the logs
+```
+
+**USE SSH KEYS TO CONNECT TO REMOTE MACHINE**
+
+```
+ssh-keygen
+ssh-keygen -t ed25519
+ssh-kegen -b 4096
+cd ~
+cd .ssh
+ls
+find : id_ed25519 id_ed25519.pub
+ssh-copy-id <user>@10.0.2.1
+```
+```
+**LOGIN TO REMOTE SERVER AND CHECK FOR COPIED KEY**
+cd ~
+cd .ssh && ls
+cat authorized_keys
+```
+**SSH Security Considerations**
+```
+- Change the SSH inbound port.
+- Disable password-based SSH.
+- Create an exclusive SSH group.
+- Disable root login altogether.
+- Lower the amount of authentication attempts.
+- Lower the login grace time.
+- Enable SSH timeouts.
+- Implement a key management system
+```
+**EDITING SSHD_CONFIG FILE TO STRENGTH THE LINUX SECURITY**
+```
+sudo nano /etc/ssh/sshd_config
+**CONFIG**                                           **DESCRIPTION**
+---------------------------------------------------------------------------------------------------------------------------------
+Port 2222                                            CHANGE THE DEFAULT PORT FROM 22 TO ANY OTHER
+PasswordAuthentication no                            NO PASSWORD AUTHENTICATION ALLOWED
+PermitRootLogin no  OR                               NO ROOT LOGIN USING SSH
+PermitRootLogin password-prohibited
+ClientAliveInterval 300                              SSH SESSION WILL TIMEOUT 5 MINUTES
+ClientAliveCountMax 3                                Checks for 3 Alive messages replay fails and closed the sessions
+LoginGraceTime 15s                                   WAIT FOR ONLY 15 SECONDS TO CONNECT WHILE SSH
+MaxAuthTries 3                                       MAXIMUM 3 TRIES WILL BE ALLOWED FOR PASSWORD AUTHENTICATION
+MaxSession 3                                         MAXIMUM 3 SSH SESSION ARE ALLOWED
+```
+**KEY MANAGEMENT SYSTEM**
+```
+HASHICORP VAULT
+SSH.COM
+```
+**HOW TO WATCH SSH SESSION IN THE SERVER**
+```
+ss -tun
+```
