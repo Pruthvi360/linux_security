@@ -262,7 +262,7 @@ PASSWORD LIST   = /etc/shadow
 2. Manages Password Authentication methods
 3. Method should be used for Hashing methods
 **Check Which Hashing Methods is Used "Recommended is MD5"** 
-nano /etc/pam
+nano /etc/pam.d
 ```
 
 ## STRENGTHING USER PASSWORD
@@ -272,13 +272,13 @@ nano /etc/pam
 3. Min_Special_char= 1 
 4. Only allows 3 times to Enter Password
 ```
-nano /etc/pam
+nano /etc/pam.d
 
 password  [success=1 default=ingnore]    pam_unix.so  obscure use_authtok try_first_pass md5 minlen=12
 
 sudo apt install libpam-pwquality -y
 
-nano /etc/pam  
+nano /etc/pam.d  
 
 password  requisite                      pam_pwquailty.so retry=3 ucredit=1 ocredit=1 minclass=2
 ```
@@ -345,4 +345,8 @@ SSH.COM
 **HOW TO WATCH SSH SESSION IN THE SERVER**
 ```
 ss -tun
+watch -tun                         > Realtime watch of active connection
+pgrep -c sshd                      > Count of the active connection
+pkill --signal KILL sshd           > Kill the active connection
+pgrep -c sshd
 ```
