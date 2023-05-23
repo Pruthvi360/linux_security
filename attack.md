@@ -21,6 +21,7 @@ Run 'do-release-upgrade' to upgrade to it.
 
 *** System restart required ***
 Last login: Tue May 23 22:13:46 2023 from 35.235.241.18
+```
 pruthvis2340@backend-api:~$ systemctl --failed
   UNIT                          LOAD   ACTIVE SUB    DESCRIPTION                           
 ● google-osconfig-agent.service loaded failed failed Google OSConfig Agent                 
@@ -31,13 +32,17 @@ ACTIVE = The high-level unit activation state, i.e. generalization of SUB.
 SUB    = The low-level unit activation state, values depend on unit type.
 
 2 loaded units listed.
+```
+```
 pruthvis2340@backend-api:~$ systemctl status networkd
 Unit networkd.service could not be found.
 pruthvis2340@backend-api:~$ systemctl status networkd-dispatcher.service 
 
 pruthvis2340@backend-api:~$ ^C
 pruthvis2340@backend-api:~$ systemctl status google-os
-google-osconfig-agent.service  google-oslogin-cache.service   google-oslogin-cache.timer     
+google-osconfig-agent.service  google-oslogin-cache.service   google-oslogin-cache.timer 
+```
+```
 pruthvis2340@backend-api:~$ systemctl status google-osconfig-agent.service 
 ● google-osconfig-agent.service - Google OSConfig Agent
      Loaded: loaded (/lib/systemd/system/google-osconfig-agent.service; enabled; vendor preset: enabled)
@@ -51,6 +56,8 @@ May 08 08:04:24 backend-api systemd[1]: Stopped Google OSConfig Agent.
 May 08 08:04:24 backend-api systemd[1]: google-osconfig-agent.service: Start request repeated too quickly.
 May 08 08:04:24 backend-api systemd[1]: google-osconfig-agent.service: Failed with result 'signal'.
 May 08 08:04:24 backend-api systemd[1]: Failed to start Google OSConfig Agent.
+```
+```
 pruthvis2340@backend-api:~$ systemctl restart google-osconfig-agent.service 
 ==== AUTHENTICATING FOR org.freedesktop.systemd1.manage-units ===
 Authentication is required to restart 'google-osconfig-agent.service'.
@@ -60,6 +67,8 @@ polkit-agent-helper-1: pam_authenticate failed: Authentication failure
 ==== AUTHENTICATION FAILED ===
 Failed to restart google-osconfig-agent.service: Access denied
 See system logs and 'systemctl status google-osconfig-agent.service' for details.
+```
+```
 pruthvis2340@backend-api:~$ systemctl restart google-osconfig-agent.service 
 ==== AUTHENTICATING FOR org.freedesktop.systemd1.manage-units ===
 Authentication is required to restart 'google-osconfig-agent.service'.
@@ -70,6 +79,8 @@ polkit-agent-helper-1: pam_authenticate failed: Authentication failure
 Failed to restart google-osconfig-agent.service: Access denied
 See system logs and 'systemctl status google-osconfig-agent.service' for details.
 pruthvis2340@backend-api:~$ sudo su
+```
+```
 root@backend-api:/home/pruthvis2340# systemctl restart google-osconfig-agent.service
 root@backend-api:/home/pruthvis2340# passwd
 New password: 
@@ -110,7 +121,8 @@ May 23 22:35:33 backend-api sshd[703234]: pam_unix(sshd:auth): authentication fa
 May 23 22:35:34 backend-api sshd[703232]: Received disconnect from 185.239.71.86 port 47312:11: Bye Bye [preauth]
 May 23 22:35:34 backend-api sshd[703232]: Disconnected from invalid user oratest 185.239.71.86 port 47312 [preauth]
 May 23 22:35:36 backend-api sshd[703234]: Failed password for invalid user guillermo from 159.192.143.249 port 37546 ssh2
-
+```
+```
 root@backend-api:/home/pruthvis2340# nano /etc/ssh/sshd_config
 root@backend-api:/home/pruthvis2340# systemctl restart ssh
 root@backend-api:/home/pruthvis2340# systemctl statis google-osconfig-agent.service
@@ -136,6 +148,8 @@ ACTIVE = The high-level unit activation state, i.e. generalization of SUB.
 SUB    = The low-level unit activation state, values depend on unit type.
 
 1 loaded units listed.
+```
+```
 root@backend-api:/home/pruthvis2340# systemctl restart networkd-dispathcher
 Failed to restart networkd-dispathcher.service: Unit networkd-dispathcher.service not found.
 root@backend-api:/home/pruthvis2340# systemctl restart networkd-dispatcher
@@ -156,3 +170,4 @@ May 23 22:46:11 backend-api systemd[1]: Started Dispatcher daemon for systemd-ne
 root@backend-api:/home/pruthvis2340# nano /etc/ssh/sshd_config
 root@backend-api:/home/pruthvis2340# systemctl restart sshd
 root@backend-api:/home/pruthvis2340# 
+```
