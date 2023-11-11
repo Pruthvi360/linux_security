@@ -350,3 +350,13 @@ pgrep -c sshd                      > Count of the active connection
 pkill --signal KILL sshd           > Kill the active connection
 pgrep -c sshd
 ```
+Nmap commands
+```
+nmap --badsum <target-ip>
+nmap --spoof-mac 00:11:22:33:44:55 <target-ip>
+nmap -T2 -f <target-ip>
+nmap -sS <target-ip>
+nmap --traceroute <target-ip>
+namp -iL targets.txt
+nmap --top-ports 10 <target-ip>
+```
